@@ -7,13 +7,17 @@ def main():
         versus = input_multiplayer_or_computer()
         if versus == 1:
             sym1 = input_symbol(1)
-            sym2 = input_symbol(2)
+            while True:
+                sym2 = input_symbol(2)
+                if sym1 == sym2:
+                    print("Symbol already taken! Please type another symbol for your player.")
+                else:
+                    break
             game, player1, player2 = start_game(sym1, sym2)
             dim = game.get_board_dim()
-            print("To play, please type in the row number, then the column number separated by a comma, no spaces.\n \
-                  Row number and column number start at 0 and go down and right, respectively. For example, 0,0 \n \
-                  would place your symbol on the top left corner. 2,2 would place your symbol on the bottom \n \
-                  right corner.")
+            display_str = "To play, please type in the row number, then the column number separated by a comma, no spaces. "
+            display_str += "Row number and column number start at 0 and go down and right, respectively."
+            print(display_str)
             flag = True
             while game.is_in_progress():
                 print(game)
@@ -29,8 +33,10 @@ def main():
             x = input_play_again()
             if x == 'n':
                 return
-        else:
+        elif versus == 2:
             print("Sorry! Feature not implemented yet!")
+        else:
+            print("Please follow directions! 1 or 2.")
 
 # ========================================================
 
