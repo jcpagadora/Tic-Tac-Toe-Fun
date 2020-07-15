@@ -35,15 +35,20 @@ def input_place(dim, symbol):
     while True:
         print("Player", symbol, end="'s turn")
         print(":")
-        x = input()
-        x = x.split(",")
-        if len(x) != 2:
-            print("Invalid input! Must be <row num>,<col_num>. 0,0 is top-left corner, and 3,3 is bottom-right corner.")
+        x_raw = input()
+        x = x_raw.split(",")
+        if len(x_raw) != 3 or x_raw[1] != ',' or len(x) != 2:
+            print("Invalid input! Must be <row num>,<col_num>. 0,0 is top-left corner, and 2,2 is bottom-right corner.")
         else:
-            i, j = int(x[0]), int(x[1])
+            try:
+                i, j = int(x[0]), int(x[1])
+            except ValueError:
+                print("Invalid input: Entries must be integers between 0 and 2.")
+                continue
             if i >= dim or j >= dim:
                 print("Invalid input: out of bounds!")
-            return i, j
+            else:
+                return i, j
 
 def input_play_again():
     while True:
